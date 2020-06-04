@@ -6,7 +6,7 @@ class ImageSlider extends StatefulWidget {
   _SliderState createState() => _SliderState();
 }
 
-class _SliderState extends State<Slider> {
+class _SliderState extends State<ImageSlider> {
   final List<String> imgList = [
     "assets/images/img_3.jpg",
     "assets/images/img_1.jpg",

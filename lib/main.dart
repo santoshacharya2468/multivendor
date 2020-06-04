@@ -1,3 +1,4 @@
+import 'package:checkshopsonline/screens/shop_detail.dart';
 import 'package:flutter/material.dart';
 import 'widgets/department.dart';
 import 'widgets/myappbar.dart';
@@ -7,7 +8,7 @@ void main() {
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  // This widget is the root of  application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.yellow[900],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: ShopDetail(),
     );
   }
 }
@@ -42,8 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                //image slider widget
                 ImageSlider(),
-                //departments
+                //departments didget
                 DepartmentList(),
                 Container(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -51,10 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 25.0,
-                        ))),
+                        ))
+                        ),
               ],
             ),
           ),
+          //shop list widget
           ShopList(),
         ]),
       ),
