@@ -171,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
           itemBuilder: (context, index) {
             return Card(
               child: Container(
-                width: 80.0,
+                width: 60.0,
                 margin: const EdgeInsets.symmetric(horizontal: 1.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -181,8 +181,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       radius: 35.0,
                       child: Image.asset(
                         departments[index]['icon'],
-                        height: 50.0,
-                        width:50.0,
+                        height: 40.0,
+                        width:40.0,
                         fit: BoxFit.cover,
                         
                         color: Colors.white,
