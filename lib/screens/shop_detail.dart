@@ -1,10 +1,14 @@
+import 'package:checkshopsonline/models/product.dart';
 import 'package:checkshopsonline/models/shop.dart';
 import 'package:checkshopsonline/widgets/department.dart';
 import 'package:checkshopsonline/widgets/myappbar.dart';
+import 'package:checkshopsonline/widgets/product_by_category_list.dart';
 import 'package:checkshopsonline/widgets/product_list.dart';
 import 'package:checkshopsonline/widgets/slider.dart';
+import 'package:checkshopsonline/widgets/topbar.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
+
 class ShopDetail extends StatefulWidget {
   final Shop shop;
   ShopDetail(this.shop);
@@ -12,23 +16,60 @@ class ShopDetail extends StatefulWidget {
   _ShopDetailState createState() => _ShopDetailState();
 }
 
-class _ShopDetailState extends State<ShopDetail>
-    with SingleTickerProviderStateMixin {
-  final tabs = [
-    ProductList(),
-    SliverToBoxAdapter(
-      child: Text("Category view"),
-    )
+class _ShopDetailState extends State<ShopDetail> {
+  static final List<Product> products = [
+    Product(
+        id: '1',
+        name: "Sweater",
+        imageUrl: ["assets/images/sweater.jfif"],
+        price: 220.5),
+    Product(
+        id: '1',
+        name: "Tshirt",
+        imageUrl: ["assets/images/tshirt.jpg"],
+        price: 120.5),
+    Product(
+        id: '1',
+        name: "Sweater",
+        imageUrl: ["assets/images/sweater.jfif"],
+        price: 220.5),
+    Product(
+        id: '1',
+        name: "Tshirt",
+        imageUrl: ["assets/images/tshirt.jpg"],
+        price: 120.5),
   ];
-  int _pageIndex = 0;
-  TabController tabController;
+  static final categoires = [
+    "Gents Wear",
+    'Female Wear',
+    'Cold weather',
+    'Mausam',
+    'Baby Wear'
+  ];
+  Widget buildGrid(int index,BuildContext context,Shop shop){
+    if(index==0){
+      return ProductList();
+    }
+    return SliverGrid(delegate: SliverChildBuilderDelegate(
+      (context,index){
+         return ProductByCategoryList(
+              products: products,
+              categoryName: categoires[index],
+              shop:shop,
+            );
+      },
+      childCount: categoires.length
+    ),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 1,
+      //crossAxisSpacing: 10.0
+   childAspectRatio: MediaQuery.of(context).size.width/170,
+      mainAxisSpacing: 5.0
+      ),
 
-  @override
-  void initState() {
-    tabController = new TabController(length: 2, vsync: this);
-    super.initState();
+    );
   }
-
+  int _pageIndex = 0;
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -44,104 +85,71 @@ class _ShopDetailState extends State<ShopDetail>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 //top bar
-                Container(
-                  height: 60.0,
-                  width: deviceSize.width,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      SizedBox(width: 5.0),
-                      Image.asset(widget.shop.logo,
-                          height: 60.0, width: 70.0, fit: BoxFit.cover),
-                      IconButton(
-                        icon: Icon(
-                          Icons.location_on,
-                          size: 30.0,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.language,
-                          size: 30.0,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.call,
-                            size: 30.0, color: Theme.of(context).primaryColor),
-                        onPressed: ()async {
-                          if(await launcher.canLaunch(widget.shop.mobileNumnber)){
-                            launcher.launch("tel:${widget.shop.mobileNumnber}");
-                          }
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.smartphone,
-                          size: 30.0,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Image.asset(
-                          "assets/images/facebook.png",
-                          height: 30.0,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        onPressed: () async{
-                          if(await launcher.canLaunch(widget.shop.facebookUrl)){
-                            launcher.launch("htpps:${widget.shop.facebookUrl}");
-                          }
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.list,
-                          size: 30.0,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
+                buildTopBar(context,widget.shop),
                 //image slider widget
                 ImageSlider(),
-                //departments widget
-                DepartmentList(),
+                //shop prouducts and category view
+                Container(
+                    height: 30.0,
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    width: deviceSize.width,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _pageIndex = 0;
+                            });
+                          },
+                          child: Container(
+                            height: 30.0,
+                            width: deviceSize.width / 2 - 10,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: _pageIndex == 0
+                                  ? Theme.of(context).primaryColor
+                                  : Colors.grey,
+                            ),
+                            child: Center(
+                                child: Text(
+                              "Latest Products",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 18.0),
+                            )),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _pageIndex = 1;
+                            });
+                          },
+                          child: Container(
+                            height: 30.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: _pageIndex == 1
+                                  ? Theme.of(context).primaryColor
+                                  : Colors.grey,
+                            ),
+                            width: deviceSize.width / 2 - 10,
+                            child: Center(
+                                child: Text(
+                              "Categories",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 18.0),
+                            )),
+                          ),
+                        ),
+                      ],
+                    )),
               ],
             ),
           ),
+          //tabs[_pageIndex]
+          buildGrid(_pageIndex,context,widget.shop)
           //shop list widget
-          SliverToBoxAdapter(
-            child: TabBar(
-                indicatorWeight: 1.0,
-                onTap: (i) {
-                  setState(() {
-                    _pageIndex = i;
-                  });
-                },
-                controller: tabController,
-                tabs: [
-                  Text("Latest Product",
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          color: _pageIndex == 0
-                              ? Theme.of(context).primaryColor
-                              : Colors.grey)),
-                  Text("Category",
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          color: _pageIndex == 1
-                              ? Theme.of(context).primaryColor
-                              : Colors.grey))
-                ]),
-          ),
-          tabs[_pageIndex]
         ]),
       ),
     );

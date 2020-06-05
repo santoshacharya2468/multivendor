@@ -2,6 +2,7 @@ import 'package:checkshopsonline/screens/shop_by_deparement.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/product_detail.dart';
 import 'screens/shop_detail.dart';
 
 class RouterGenerator{
@@ -11,6 +12,8 @@ class RouterGenerator{
       return MaterialPageRoute(builder: (context)=>ShopDetail(settings.arguments));
       case 'shop_by_dep':
       return MaterialPageRoute(builder: (context)=>ShopByDep(settings.arguments));
+      case 'product_detail':
+      return MaterialPageRoute(builder: (context)=>ProductDetail(vmodel: settings.arguments,));
       default:
       return  null;
     }
