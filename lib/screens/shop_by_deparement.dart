@@ -16,7 +16,7 @@ class _ShopDetailState extends State<ShopByDep>{
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: Container(
         height: deviceSize.height,
         width: deviceSize.width,

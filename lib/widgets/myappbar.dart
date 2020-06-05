@@ -1,56 +1,73 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-AppBar buildAppBar() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      actions: <Widget>[
-        IconButton(
-          icon: Image.asset("assets/images/pin.png"),
-          onPressed: () {},
+AppBar buildAppBar(BuildContext context,{bool home = false}) {
+  return AppBar(
+    iconTheme: IconThemeData(color:Colors.white),
+    actionsIconTheme: IconThemeData(color:Colors.white,size: 25.0),
+    automaticallyImplyLeading:home?false: true,
+    actions: <Widget>[
+      !home
+          ? IconButton(
+              icon: Icon(
+                Icons.home,
+              ),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/');
+              },
+            )
+          : Container(
+              height: 0.0,
+              width: 0.0,
+            ),
+      IconButton(
+        icon: Image.asset(
+          "assets/images/pin.png",
+          height: 25.0,
+          width: 25.0,
         ),
-        IconButton(
-          icon: Icon(
-            Icons.share,
-            color: Colors.white,
-            size: 28.0,
-          ),
-          onPressed: () {},
+        onPressed: () {
+          //selection_list
+           Navigator.pushNamed(context, 'selection_list');
+        },
+      ),
+      IconButton(
+        icon: Icon(
+          Icons.share,
+      
         ),
-        IconButton(
-          icon: Icon(
-            Icons.search,
-            color: Colors.white,
-            size: 28.0,
-          ),
-          onPressed: () {},
+        onPressed: () {},
+      ),
+      IconButton(
+        icon: Icon(
+          Icons.search,
+   
         ),
-        IconButton(
-          icon: Icon(
-            Icons.lock,
-            color: Colors.white,
-            size: 28.0,
-          ),
-          onPressed: () {},
+        onPressed: () {},
+      ),
+      IconButton(
+        icon: Icon(
+          Icons.lock,
+ 
+        ),
+        onPressed: () {},
+      ),
+    ],
+    title:home? Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("  Check",
+            style: TextStyle(fontSize: 25.0, color: Colors.grey[700])),
+        Row(
+          children: <Widget>[
+            SizedBox(width: 10.0),
+            Text(
+              "  shopsOnline",
+              style: GoogleFonts.pacifico(color: Colors.grey[700]),
+            ),
+          ],
         ),
       ],
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text("  Check",
-              style: TextStyle(fontSize: 25.0, color: Colors.grey[700])),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 10.0),
-              Text(
-                "  shopsOnline",
-                style: GoogleFonts.pacifico(color: Colors.grey[700]),
-              ),
-            ],
-          ),
-        ],
-      ),
-      titleSpacing: 0.0,
-    );
-  }
-
+    ):Container(height:0.0),
+    titleSpacing: 0.0,
+  );
+}

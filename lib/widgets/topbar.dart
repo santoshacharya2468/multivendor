@@ -1,7 +1,7 @@
 import 'package:checkshopsonline/models/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
-
+const iconSize=25.0;
 Widget buildTopBar(BuildContext context, Shop shop) {
   final deviceSize = MediaQuery.of(context).size;
   return Container(
@@ -15,7 +15,7 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Icon(
             Icons.location_on,
-            size: 30.0,
+            size:iconSize,
             color: Theme.of(context).primaryColor,
           ),
           onPressed: () {},
@@ -23,14 +23,14 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Icon(
             Icons.language,
-            size: 30.0,
+              size:iconSize,
             color: Theme.of(context).primaryColor,
           ),
           onPressed: () {},
         ),
         IconButton(
           icon: Icon(Icons.call,
-              size: 30.0, color: Theme.of(context).primaryColor),
+              size:iconSize, color: Theme.of(context).primaryColor),
           onPressed: () async {
             if (await launcher.canLaunch(shop.mobileNumnber)) {
               launcher.launch("tel:${shop.mobileNumnber}");
@@ -40,7 +40,7 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Icon(
             Icons.smartphone,
-            size: 30.0,
+             size:iconSize,
             color: Theme.of(context).primaryColor,
           ),
           onPressed: () {},
@@ -48,7 +48,7 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Image.asset(
             "assets/images/facebook.png",
-            height: 30.0,
+            height: iconSize,
             color: Theme.of(context).primaryColor,
           ),
           onPressed: () async {
@@ -60,7 +60,7 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Icon(
             Icons.list,
-            size: 30.0,
+             size:iconSize,
             color: Theme.of(context).primaryColor,
           ),
           onPressed: () {},

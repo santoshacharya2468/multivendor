@@ -50,12 +50,12 @@ class _DepartmentListState extends State<DepartmentList> {
                         widget.selectedDepartmentId != departments[index]['id']
                             ? Theme.of(context).primaryColor
                             : Colors.grey,
-                    radius: 30.0,
+                    radius: 25.0,
                     child: Center(
                       child: Image.asset(
                         departments[index]['icon'],
-                        height: 40.0,
-                        width: 40.0,
+                        height: 35.0,
+                        width: 35.0,
                         fit: BoxFit.cover,
                         color: Colors.white,
                       ),

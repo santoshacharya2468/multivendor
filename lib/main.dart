@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context,home: true),
       body: Container(
         height: deviceSize.height,
         width: deviceSize.width,
@@ -53,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text("Latest Shops",
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
+                          // letterSpacing: 0.0,
                           fontSize: 25.0,
                         ))
                         ),

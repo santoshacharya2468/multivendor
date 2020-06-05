@@ -1,14 +1,11 @@
 import 'package:checkshopsonline/models/product.dart';
 import 'package:checkshopsonline/models/shop.dart';
-import 'package:checkshopsonline/widgets/department.dart';
 import 'package:checkshopsonline/widgets/myappbar.dart';
 import 'package:checkshopsonline/widgets/product_by_category_list.dart';
 import 'package:checkshopsonline/widgets/product_list.dart';
 import 'package:checkshopsonline/widgets/slider.dart';
 import 'package:checkshopsonline/widgets/topbar.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart' as launcher;
-
 class ShopDetail extends StatefulWidget {
   final Shop shop;
   ShopDetail(this.shop);
@@ -74,7 +71,7 @@ class _ShopDetailState extends State<ShopDetail> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: Container(
         height: deviceSize.height,
         width: deviceSize.width,
@@ -147,9 +144,7 @@ class _ShopDetailState extends State<ShopDetail> {
               ],
             ),
           ),
-          //tabs[_pageIndex]
           buildGrid(_pageIndex,context,widget.shop)
-          //shop list widget
         ]),
       ),
     );
