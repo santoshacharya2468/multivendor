@@ -1,35 +1,17 @@
+import 'package:checkshopsonline/widgets/department.dart';
+import 'package:checkshopsonline/widgets/myappbar.dart';
+import 'package:checkshopsonline/widgets/shop_list.dart';
+import 'package:checkshopsonline/widgets/slider.dart';
 import 'package:flutter/material.dart';
-import 'conf.dart';
-import 'widgets/department.dart';
-import 'widgets/myappbar.dart';
-import 'widgets/shop_list.dart';
-import 'widgets/slider.dart';
-void main() {
-  runApp(MyApp());
-}
-class MyApp extends StatelessWidget {
-  // This widget is the root of  application.
+
+class ShopByDep extends StatefulWidget {
+ final  Map<String,dynamic> dep;
+  ShopByDep(this.dep);
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateRoute: RouterGenerator.generateRoute,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.yellow[900],
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-    );
-  }
+  _ShopDetailState createState() => _ShopDetailState();
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _ShopDetailState extends State<ShopByDep>{
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -46,11 +28,11 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 //image slider widget
                 ImageSlider(),
-                //departments didget
-                DepartmentList(),
+                //departments widget
+                DepartmentList(selectedDepartmentId: widget.dep['id'],),
                 Container(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Text("Latest Shops",
+                    child: Text("${widget.dep['name']} Shops",
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 25.0,
@@ -59,8 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
+          
           //shop list widget
-          ShopList(),
+         ShopList()
         ]),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 AppBar buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       actions: <Widget>[
         IconButton(
           icon: Image.asset("assets/images/pin.png"),

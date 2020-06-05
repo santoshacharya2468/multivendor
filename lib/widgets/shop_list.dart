@@ -1,3 +1,4 @@
+import 'package:checkshopsonline/models/shop.dart';
 import 'package:flutter/material.dart';
 
 class ShopList extends StatefulWidget {
@@ -44,24 +45,37 @@ class _ShopListState extends State<ShopList> {
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           final item = _shops[index];
-          return Card(
-                      child: Container(
-              child: Column(children: [
-                Container(
-                  margin: const EdgeInsets.all(2.0),
-                  child: Image.asset(
-                    item['image'],
-                    fit: BoxFit.cover,
-                    height: 70.0,
+          return GestureDetector(
+            onTap: (){
+              //to the route shop detail
+              Navigator.pushNamed(context, 'shop_detail',arguments: Shop(
+                id: "54857",
+                name: _shops[index]['name'],
+                logo: _shops[index]['image'],
+                location: "Nepal",
+                facebookUrl: "https://www.facebook.com/santoshacharya098",
+                mobileNumnber: "+9779823398751"
+              ));
+            },
+                      child: Card(
+                        child: Container(
+                child: Column(children: [
+                  Container(
+                    margin: const EdgeInsets.all(2.0),
+                    child: Image.asset(
+                      item['image'],
+                      fit: BoxFit.cover,
+                      height: 70.0,
+                    ),
                   ),
-                ),
-                Spacer(),
-                Text(item['name'],
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
-                 overflow: TextOverflow.ellipsis),
-              ]),
+                  Spacer(),
+                  Text(item['name'],
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                   overflow: TextOverflow.ellipsis),
+                ]),
+              ),
             ),
           );
         },

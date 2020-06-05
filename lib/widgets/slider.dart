@@ -36,7 +36,7 @@ class _SliderState extends State<ImageSlider> {
                   );
                 },
                 options: CarouselOptions(
-                    autoPlay: true,
+                    autoPlay: false,
                     height: 200.0,
                     viewportFraction: 1.0,
                     enlargeCenterPage: true,
