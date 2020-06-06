@@ -1,4 +1,6 @@
+import 'package:checkshopsonline/bloc/selection_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'conf.dart';
 import 'widgets/department.dart';
 import 'widgets/myappbar.dart';
@@ -11,14 +13,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of  application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateRoute: RouterGenerator.generateRoute,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.yellow[900],
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context)=>SelectionBloc())
+      ],
+          child: MaterialApp(
+        onGenerateRoute: RouterGenerator.generateRoute,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Colors.yellow[900],
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: MyHomePage(),
       ),
-      home: MyHomePage(),
     );
   }
 }
