@@ -46,15 +46,20 @@ class _SliderState extends State<ImageSlider> {
                       });
                     }),
               ),
-              Container(
-                height: 30.0,
-                width: 80.0,
-                color: Theme.of(context).primaryColor,
-                child: Center(
-                    child: Text(
-                  "All Deals",
-                  style: TextStyle(fontSize: 20.0, color: Colors.white),
-                )),
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, 'latest_deals');
+                },
+                              child: Container(
+                  height: 30.0,
+                  width: 80.0,
+                  color: Theme.of(context).primaryColor,
+                  child: Center(
+                      child: Text(
+                    "All Deals",
+                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                  )),
+                ),
               ),
             ],
           ),
