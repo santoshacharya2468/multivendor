@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouterGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.yellow[900],
+        // primaryColor: Colors.yellow[900],
+        
+        primaryColor: Color(0xFFf49820),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),

@@ -1,8 +1,6 @@
 import 'package:checkshopsonline/main.dart';
 import 'package:checkshopsonline/screens/shop_by_deparement.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'screens/latest_deals.dart';
 import 'screens/product_detail.dart';
 import 'screens/selections.dart';

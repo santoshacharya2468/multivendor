@@ -34,7 +34,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                         child: Text("Item Removed from selection List"))),
               ));
             }
-          
+
             // else if (state is NewItemAddedState) {
             //   Scaffold.of(context).showSnackBar(SnackBar(
             //     backgroundColor: Colors.greenAccent,
@@ -89,7 +89,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                           itemCount: state.products.length,
                           itemBuilder: (context, index) {
                             var p = state.products[index];
-                            return Card(child: PinnedProductView(p));
+                            return PinnedProductView(p);
                           },
                         ),
                       ),
@@ -116,11 +116,10 @@ class _PinnedProductViewState extends State<PinnedProductView> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    return Container(
-      height: 80,
-      width: deviceSize.width,
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
+    return Card(
+          child: Container(
+        height: 80,
+        width: deviceSize.width,
         child: Row(
           children: <Widget>[
             Container(
@@ -134,71 +133,74 @@ class _PinnedProductViewState extends State<PinnedProductView> {
             Expanded(
               child: BlocListener<SelectionBloc, SelectionState>(
                 listener: (context, state) {},
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(widget.product.name),
-                      Text("Rs ${widget.product.price}",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                          )),
-                      Row(
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                widget.product.selectedItem += 1;
-                                 BlocProvider.of<SelectionBloc>(context)
-                    .add(UpdateItemCountEvent(widget.product));
-                              });
-                            },
-                            child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(widget.product.name),
+                        Text("Rs ${widget.product.price}",
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                            )),
+                        Row(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  widget.product.selectedItem += 1;
+                                  BlocProvider.of<SelectionBloc>(context)
+                                      .add(UpdateItemCountEvent(widget.product));
+                                });
+                              },
+                              child: Container(
+                                height: 30.0,
+                                width: 30.0,
+                                color: Colors.grey,
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            Container(
                               height: 30.0,
                               width: 30.0,
                               color: Colors.grey,
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.white,
+                              child: Center(
+                                  child: Text("${widget.product.selectedItem}")),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (widget.product.selectedItem > 1) {
+                                    widget.product.selectedItem -= 1;
+                                    BlocProvider.of<SelectionBloc>(context).add(
+                                        UpdateItemCountEvent(widget.product));
+                                  }
+                                });
+                              },
+                              child: Container(
+                                height: 30.0,
+                                width: 30.0,
+                                color: Colors.grey,
+                                child: Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Container(
-                            height: 30.0,
-                            width: 30.0,
-                            color: Colors.grey,
-                            child: Center(
-                                child: Text("${widget.product.selectedItem}")),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (widget.product.selectedItem > 1) {
-                                  widget.product.selectedItem -= 1;
-                                   BlocProvider.of<SelectionBloc>(context)
-                    .add(UpdateItemCountEvent(widget.product));
-                                }
-                              });
-                            },
-                            child: Container(
-                              height: 30.0,
-                              width: 30.0,
-                              color: Colors.grey,
-                              child: Icon(
-                                Icons.remove,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ]),
+                          ],
+                        )
+                      ]),
+                ),
               ),
             ),
             GestureDetector(

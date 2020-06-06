@@ -53,7 +53,7 @@ class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
         yield SelectionListLoadingState();
         List<Product> products = [
           Product(
-              id: '10',
+              id: '17',
               name: "Sweater",
               imageUrl: ["assets/images/sweater.jfif"],
               price: 220.5),

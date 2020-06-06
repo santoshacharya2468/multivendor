@@ -26,13 +26,17 @@ Widget buildTopBar(BuildContext context, Shop shop) {
               size:iconSize,
             color: Theme.of(context).primaryColor,
           ),
-          onPressed: () {},
+          onPressed: ()async {
+             if (await launcher.canLaunch("https://www.youtube.com")) {
+              launcher.launch("https://www.youtube.com");
+            }
+          },
         ),
         IconButton(
           icon: Icon(Icons.call,
               size:iconSize, color: Theme.of(context).primaryColor),
           onPressed: () async {
-            if (await launcher.canLaunch(shop.mobileNumnber)) {
+            if (await launcher.canLaunch("tel:"+shop.mobileNumnber)) {
               launcher.launch("tel:${shop.mobileNumnber}");
             }
           },
@@ -53,7 +57,7 @@ Widget buildTopBar(BuildContext context, Shop shop) {
           ),
           onPressed: () async {
             if (await launcher.canLaunch(shop.facebookUrl)) {
-              launcher.launch("htpps:${shop.facebookUrl}");
+              launcher.launch("${shop.facebookUrl}");
             }
           },
         ),

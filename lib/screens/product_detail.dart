@@ -14,6 +14,11 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+    @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<SelectionBloc>(context).add(LoadSelectionListEvent());
+  }
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
