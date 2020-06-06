@@ -1,7 +1,9 @@
+import 'package:checkshopsonline/bloc/selection_bloc.dart';
 import 'package:checkshopsonline/models/productviewmodel.dart';
 import 'package:checkshopsonline/widgets/myappbar.dart';
 import 'package:checkshopsonline/widgets/topbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetail extends StatefulWidget {
   final ProductViewModel vmodel;
@@ -22,9 +24,11 @@ class _ProductDetailState extends State<ProductDetail> {
         width: deviceSize.width,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           buildTopBar(context, widget.vmodel.shop),
-          SizedBox(height: 5.0,),
+          SizedBox(
+            height: 5.0,
+          ),
           Expanded(
-                      child: SingleChildScrollView(
+            child: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
                 Image.asset(
@@ -37,7 +41,8 @@ class _ProductDetailState extends State<ProductDetail> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     widget.vmodel.product.name,
-                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -54,24 +59,45 @@ class _ProductDetailState extends State<ProductDetail> {
                       "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx"),
                 ),
                 Center(
-                  child: Container(
-                    height: 45.0,
-                    width: 220.0,
-                    child: RaisedButton(
-                      color: Theme.of(context).primaryColor,
-                      child: Center(
-                          child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.add,
-                            color: Colors.white,
+                  child: BlocListener<SelectionBloc, SelectionState>(
+                    listener: (context, state) {
+                      if (state is NewItemAddedState) {
+                        Scaffold.of(context).hideCurrentSnackBar();
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          duration: Duration(seconds: 1),
+                          backgroundColor: Colors.greenAccent,
+                          content: Container(
+                            height: 20.0,
+                                                      child: Center(
+                                child:
+                                    Text(" A new item Added to selection List")),
                           ),
-                          Text("Add to my selections",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18.0)),
-                        ],
-                      )),
-                      onPressed: () {},
+                        ));
+                      }
+                    },
+                    child: Container(
+                      height: 45.0,
+                      width: 220.0,
+                      child: RaisedButton(
+                        color: Theme.of(context).primaryColor,
+                        child: Center(
+                            child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                            Text("Add to my selections",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18.0)),
+                          ],
+                        )),
+                        onPressed: () {
+                          BlocProvider.of<SelectionBloc>(context).add(
+                              AddItemToSelectionListEvent(
+                                  widget.vmodel.product));
+                        },
+                      ),
                     ),
                   ),
                 )
