@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-AppBar buildAppBar(BuildContext context,{bool home = false}) {
+AppBar buildAppBar(BuildContext context,{bool home = false,pin:true}) {
   return AppBar(
     iconTheme: IconThemeData(color:Colors.white),
     actionsIconTheme: IconThemeData(color:Colors.white,size: 25.0),
@@ -19,7 +19,7 @@ AppBar buildAppBar(BuildContext context,{bool home = false}) {
               height: 0.0,
               width: 0.0,
             ),
-      IconButton(
+      pin?IconButton(
         icon: Image.asset(
           "assets/images/pin.png",
           height: 25.0,
@@ -29,7 +29,7 @@ AppBar buildAppBar(BuildContext context,{bool home = false}) {
           //selection_list
            Navigator.pushNamed(context, 'selection_list');
         },
-      ),
+      ):Container(height:25.0,width:25.0),
       IconButton(
         icon: Icon(
           Icons.share,

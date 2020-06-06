@@ -68,10 +68,18 @@ class _ProductDetailState extends State<ProductDetail> {
                           backgroundColor: Colors.greenAccent,
                           content: Container(
                             height: 20.0,
-                                                      child: Center(
-                                child:
-                                    Text(" A new item Added to selection List")),
+                            child: Center(
+                                child: Text(
+                                    " A new item Added to selection List")),
                           ),
+                        ));
+                      } else if (state is SelectionListAddingErrorState) {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          duration: Duration(seconds: 3),
+                          backgroundColor: Colors.redAccent,
+                          content: Container(
+                              height: 20.0,
+                              child: Center(child: Text(state.message))),
                         ));
                       }
                     },

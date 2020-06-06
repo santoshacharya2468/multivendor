@@ -20,7 +20,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: buildAppBar(context),
+        appBar: buildAppBar(context, pin: false),
         body: BlocListener<SelectionBloc, SelectionState>(
           listener: (context, state) {
             if (state is ItemRemovedState) {
@@ -28,12 +28,13 @@ class _SelectionScreenState extends State<SelectionScreen> {
               Scaffold.of(context).showSnackBar(SnackBar(
                 duration: Duration(seconds: 1),
                 backgroundColor: Colors.redAccent,
-                content:
-                    Container(
-                      height: 20.0,
-                      child: Center(child: Text("Item Removed from selection List"))),
+                content: Container(
+                    height: 20.0,
+                    child: Center(
+                        child: Text("Item Removed from selection List"))),
               ));
             }
+          
             // else if (state is NewItemAddedState) {
             //   Scaffold.of(context).showSnackBar(SnackBar(
             //     backgroundColor: Colors.greenAccent,
@@ -47,35 +48,44 @@ class _SelectionScreenState extends State<SelectionScreen> {
             child: BlocBuilder<SelectionBloc, SelectionState>(
               builder: (context, state) {
                 if (state is SelectionListLoadedState) {
-                  if(state.products.length==0){
-                    return Center(child:Text("No item in your selection list"));
+                  if (state.products.length == 0) {
+                    return Center(
+                        child: Text("No item in your selection list"));
                   }
                   return Column(
                     children: <Widget>[
                       Container(
                         height: 40.0,
-                        child: Builder(builder: (context){
-                          var totalPrice=0.0;
-                          for(var p in state.products){
-                            totalPrice+=p.selectedItem*p.price;
+                        child: Builder(builder: (context) {
+                          var totalPrice = 0.0;
+                          for (var p in state.products) {
+                            totalPrice += p.selectedItem * p.price;
                           }
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("Total"),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("Rs $totalPrice"),
-                            )
-                          ],);
-
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("Total",
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("Rs $totalPrice",
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Theme.of(context).primaryColor,
+                                    )),
+                              )
+                            ],
+                          );
                         }),
                       ),
                       Expanded(
-                                              child: ListView.builder(
+                        child: ListView.builder(
                           itemCount: state.products.length,
                           itemBuilder: (context, index) {
                             var p = state.products[index];
@@ -139,6 +149,8 @@ class _PinnedProductViewState extends State<PinnedProductView> {
                             onTap: () {
                               setState(() {
                                 widget.product.selectedItem += 1;
+                                 BlocProvider.of<SelectionBloc>(context)
+                    .add(UpdateItemCountEvent(widget.product));
                               });
                             },
                             child: Container(
@@ -169,6 +181,8 @@ class _PinnedProductViewState extends State<PinnedProductView> {
                               setState(() {
                                 if (widget.product.selectedItem > 1) {
                                   widget.product.selectedItem -= 1;
+                                   BlocProvider.of<SelectionBloc>(context)
+                    .add(UpdateItemCountEvent(widget.product));
                                 }
                               });
                             },

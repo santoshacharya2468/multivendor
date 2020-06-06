@@ -6,6 +6,7 @@ import 'package:checkshopsonline/widgets/product_list.dart';
 import 'package:checkshopsonline/widgets/slider.dart';
 import 'package:checkshopsonline/widgets/topbar.dart';
 import 'package:flutter/material.dart';
+
 class ShopDetail extends StatefulWidget {
   final Shop shop;
   ShopDetail(this.shop);
@@ -16,22 +17,22 @@ class ShopDetail extends StatefulWidget {
 class _ShopDetailState extends State<ShopDetail> {
   static final List<Product> products = [
     Product(
-        id: '1',
+        id: '10',
         name: "Sweater",
         imageUrl: ["assets/images/sweater.jfif"],
         price: 220.5),
     Product(
-        id: '1',
+        id: '20',
         name: "Tshirt",
         imageUrl: ["assets/images/tshirt.jpg"],
         price: 120.5),
     Product(
-        id: '1',
-        name: "Sweater",
+        id: '30',
+        name: "Tshirt",
         imageUrl: ["assets/images/sweater.jfif"],
-        price: 220.5),
+        price: 120.5),
     Product(
-        id: '1',
+        id: '40',
         name: "Tshirt",
         imageUrl: ["assets/images/tshirt.jpg"],
         price: 120.5),
@@ -43,29 +44,26 @@ class _ShopDetailState extends State<ShopDetail> {
     'Mausam',
     'Baby Wear'
   ];
-  Widget buildGrid(int index,BuildContext context,Shop shop){
-    if(index==0){
+  Widget buildGrid(int index, BuildContext context, Shop shop) {
+    if (index == 0) {
       return ProductList();
     }
-    return SliverGrid(delegate: SliverChildBuilderDelegate(
-      (context,index){
-         return ProductByCategoryList(
-              products: products,
-              categoryName: categoires[index],
-              shop:shop,
-            );
-      },
-      childCount: categoires.length
-    ),
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 1,
-      //crossAxisSpacing: 10.0
-   childAspectRatio: MediaQuery.of(context).size.width/170,
-      mainAxisSpacing: 5.0
-      ),
-
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate((context, index) {
+        return ProductByCategoryList(
+          products: products,
+          categoryName: categoires[index],
+          shop: shop,
+        );
+      }, childCount: categoires.length),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 1,
+          //crossAxisSpacing: 10.0
+          childAspectRatio: MediaQuery.of(context).size.width / 170,
+          mainAxisSpacing: 5.0),
     );
   }
+
   int _pageIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -82,7 +80,7 @@ class _ShopDetailState extends State<ShopDetail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 //top bar
-                buildTopBar(context,widget.shop),
+                buildTopBar(context, widget.shop),
                 //image slider widget
                 ImageSlider(),
                 //shop prouducts and category view
@@ -144,7 +142,7 @@ class _ShopDetailState extends State<ShopDetail> {
               ],
             ),
           ),
-          buildGrid(_pageIndex,context,widget.shop)
+          buildGrid(_pageIndex, context, widget.shop)
         ]),
       ),
     );

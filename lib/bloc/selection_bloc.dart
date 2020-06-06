@@ -23,9 +23,18 @@ class UpdateItemCountEvent extends SelectionEvent {
 abstract class SelectionState {}
 
 class SelectionInitialState extends SelectionState {}
+
 class NewItemAddedState extends SelectionState {}
+
 class ItemRemovedState extends SelectionState {}
+
 class SelectionListLoadingState extends SelectionState {}
+
+class SelectionListAddingErrorState extends SelectionState {
+  String message;
+  SelectionListAddingErrorState(this.message);
+}
+
 class SelectionListLoadedState extends SelectionState {
   List<Product> products;
   SelectionListLoadedState(this.products);
@@ -38,57 +47,69 @@ class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
   @override
   Stream<SelectionState> mapEventToState(SelectionEvent event) async* {
     if (event is LoadSelectionListEvent) {
-      if(mySelections!=null){
+      if (mySelections != null) {
+        yield SelectionListLoadedState(mySelections);
+      } else {
+        yield SelectionListLoadingState();
+        List<Product> products = [
+          Product(
+              id: '10',
+              name: "Sweater",
+              imageUrl: ["assets/images/sweater.jfif"],
+              price: 220.5),
+          Product(
+              id: '12',
+              name: "Tshirt",
+              imageUrl: ["assets/images/tshirt.jpg"],
+              price: 120.5),
+          Product(
+              id: '124',
+              name: "Sweater",
+              imageUrl: ["assets/images/sweater.jfif"],
+              price: 220.5),
+          Product(
+              id: '174',
+              name: "Tshirt",
+              imageUrl: ["assets/images/tshirt.jpg"],
+              price: 120.5),
+        ];
+        mySelections = products;
         yield SelectionListLoadedState(mySelections);
       }
-      else{
-      yield SelectionListLoadingState();
-      List<Product> products = [
-        Product(
-            id: '1',
-            name: "Sweater",
-            imageUrl: ["assets/images/sweater.jfif"],
-            price: 220.5),
-        Product(
-            id: '1',
-            name: "Tshirt",
-            imageUrl: ["assets/images/tshirt.jpg"],
-            price: 120.5),
-        Product(
-            id: '1',
-            name: "Sweater",
-            imageUrl: ["assets/images/sweater.jfif"],
-            price: 220.5),
-        Product(
-            id: '1',
-            name: "Tshirt",
-            imageUrl: ["assets/images/tshirt.jpg"],
-            price: 120.5),
-      ];
-      mySelections=products;
-      yield SelectionListLoadedState(mySelections);
-      }
-    }
-    else if(event is AddItemToSelectionListEvent){
-      if(mySelections!=null){
+    } else if (event is AddItemToSelectionListEvent) {
+      bool shouldadd = true;
+      if (mySelections != null && mySelections.length > 0) {
+        for (var element in mySelections) {
+          if (element.id == event.newProduct.id) {
+            shouldadd = false;
+            break;
+          }
+        }
+        if (shouldadd) {
+          mySelections.add(event.newProduct);
+          yield NewItemAddedState();
+        } else {
+          yield SelectionListAddingErrorState(
+              "Product is already added to selection list");
+        }
+      } else {
+        mySelections = List<Product>();
         mySelections.add(event.newProduct);
+        yield NewItemAddedState();
       }
-      else{
-        mySelections=List<Product>();
-        mySelections.add(event.newProduct);
-      }
-      yield NewItemAddedState();
+
       yield SelectionListLoadedState(mySelections);
-    }
-    else if(event is RemoveItemFromSelectionListEvent){
+    } else if (event is RemoveItemFromSelectionListEvent) {
       mySelections.remove(event.oldProduct);
       yield ItemRemovedState();
       yield SelectionListLoadedState(mySelections);
-    }
-    else if(event is UpdateItemCountEvent){
-      mySelections.where((element) => element.id==event.productToUpdate.id).single.selectedItem=event.productToUpdate.selectedItem;
+    } else if (event is UpdateItemCountEvent) {
+      mySelections.forEach((element) {
+        if (element == event.productToUpdate) {
+          element.selectedItem = event.productToUpdate.selectedItem;
+        }
+      });
       yield SelectionListLoadedState(mySelections);
-
     }
   }
 }
