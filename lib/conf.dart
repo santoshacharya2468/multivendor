@@ -7,35 +7,39 @@ import 'screens/product_detail.dart';
 import 'screens/selections.dart';
 import 'screens/shop_detail.dart';
 
-class RouterGenerator{
-  static Route<dynamic> generateRoute(RouteSettings settings){
-    switch(settings.name){
+class RouterGenerator {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
       case '/':
-      return MaterialPageRoute(builder: (context)=>MyHomePage());
+        return MaterialPageRoute(builder: (context) => MyHomePage());
       case "shop_detail":
-      return MaterialPageRoute(builder: (context)=>ShopDetail(settings.arguments));
+        return MaterialPageRoute(
+            builder: (context) => ShopDetail(settings.arguments));
       case 'shop_by_dep':
-      return MaterialPageRoute(builder: (context)=>ShopByDep(settings.arguments));
+        return MaterialPageRoute(
+            builder: (context) => ShopByDep(settings.arguments));
       case 'product_detail':
-      return MaterialPageRoute(builder: (context)=>ProductDetail(vmodel: settings.arguments,));
+        return MaterialPageRoute(
+            builder: (context) => ProductDetail(
+                  vmodel: settings.arguments,
+                ));
       case 'selection_list':
-      return MaterialPageRoute(builder: (context)=>SelectionScreen());
+        return MaterialPageRoute(builder: (context) => SelectionScreen());
       case 'latest_deals':
-      return MaterialPageRoute(builder: (context)=>LatesetDeals());
+        return MaterialPageRoute(builder: (context) => LatesetDeals());
       default:
-      return  null;
+        return null;
     }
-
   }
 }
- final List<String> imgList = [
-    "assets/images/img_3.jpg",
-    "assets/images/img_1.jpg",
-    "assets/images/img_2.jpg",
-  ];
-List<Deal> deals=[
-  Deal(caption: "Nice",isImage: false,mediaUrl: "https://www.youtube.com/watch?v=KmzdUe0RSJo"),
-  Deal(caption: "Nice",isImage: true,mediaUrl:"assets/images/img_3.jpg"),
-  Deal(caption: "Nice",isImage: true,mediaUrl:"assets/images/img_1.jpg"),
-  Deal(caption: "Nice",isImage: true,mediaUrl:"assets/images/img_1.jpg"),
+
+List<Deal> deals = [
+  Deal(
+      caption: "Nice",
+      isImage: false,
+      bannerImage: "assets/images/img_1.jpg",
+      mediaUrl: "https://www.youtube.com/watch?v=KmzdUe0RSJo"),
+  Deal(caption: "Nice", isImage: true, mediaUrl: "assets/images/img_3.jpg"),
+  Deal(caption: "Nice", isImage: true, mediaUrl: "assets/images/img_2.jpg"),
+  Deal(caption: "Nice", isImage: true, mediaUrl: "assets/images/img_1.jpg"),
 ];

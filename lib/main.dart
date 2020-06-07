@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouterGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-       // primaryColor:Colors.orange[800],
+     
         //252,209,42
-        
-       primaryColor: Color.fromRGBO(255, 223, 0, 1),
+      
+      primaryColor: Color.fromRGBO(240, 120, 0, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),
