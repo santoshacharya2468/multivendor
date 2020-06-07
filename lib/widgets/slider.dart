@@ -47,17 +47,17 @@ class _SliderState extends State<ImageSlider> {
                     }),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.pushNamed(context, 'latest_deals');
                 },
-                              child: Container(
+                child: Container(
                   height: 30.0,
                   width: 80.0,
                   color: Theme.of(context).primaryColor,
                   child: Center(
                       child: Text(
                     "All Deals",
-                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    style: TextStyle(fontSize: 18.0, color: Colors.white),
                   )),
                 ),
               ),

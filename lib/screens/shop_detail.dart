@@ -60,7 +60,7 @@ class _ShopDetailState extends State<ShopDetail> {
           crossAxisCount: 1,
           //crossAxisSpacing: 10.0
           childAspectRatio: MediaQuery.of(context).size.width / 170,
-          mainAxisSpacing: 5.0),
+          mainAxisSpacing: 02.0),
     );
   }
 

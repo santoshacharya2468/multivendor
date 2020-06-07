@@ -33,7 +33,7 @@ class _ProductByCategoryListState extends State<ProductByCategoryList> {
                   child: Text(
                     widget.categoryName,
                     style: TextStyle(
-                        fontSize: 20.0, color: Theme.of(context).primaryColor),
+                        fontSize: 18.0, color: Theme.of(context).primaryColor),
                   ),
                 ),
                 GestureDetector(

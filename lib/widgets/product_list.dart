@@ -58,7 +58,7 @@ class _ProductListState extends State<ProductList> {
                 Spacer(),
                 Text(item['name'],
                 style: TextStyle(
-                  fontSize: 18.0,
+                 // fontSize: 16.0,
                 ),
                  overflow: TextOverflow.ellipsis),
               ]),

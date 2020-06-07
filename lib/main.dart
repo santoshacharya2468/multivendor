@@ -21,9 +21,10 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouterGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-        // primaryColor: Colors.yellow[900],
+        primaryColor:Colors.orange[800],
+        //252,209,42
         
-        primaryColor: Color(0xFFf49820),
+       // primaryColor: Color(0xFFf49820),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),
@@ -63,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           // letterSpacing: 0.0,
-                          fontSize: 25.0,
+                          fontSize: 20.0,
                         ))
                         ),
               ],
