@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
        // primaryColor:Colors.orange[800],
         //252,209,42
         
-       primaryColor: Color(0xFFf49820),
+       primaryColor: Color.fromRGBO(255, 223, 0, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),
