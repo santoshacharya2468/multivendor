@@ -7,6 +7,8 @@ import 'package:checkshopsonline/widgets/slider.dart';
 import 'package:checkshopsonline/widgets/topbar.dart';
 import 'package:flutter/material.dart';
 
+import '../conf.dart';
+
 class ShopDetail extends StatefulWidget {
   final Shop shop;
   ShopDetail(this.shop);
@@ -82,7 +84,7 @@ class _ShopDetailState extends State<ShopDetail> {
                 //top bar
                 buildTopBar(context, widget.shop),
                 //image slider widget
-                ImageSlider(),
+                ImageSlider(deals),
                 //shop prouducts and category view
                 Container(
                     height: 30.0,

@@ -1,5 +1,8 @@
+
 class Deal{
-  String image;
+  String mediaUrl;
   String caption;
-  Deal({this.image,this.caption});
+  //media may be video or image
+  bool isImage;
+  Deal({this.mediaUrl,this.caption,this.isImage});
 }

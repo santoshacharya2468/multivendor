@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouterGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-        primaryColor:Colors.orange[800],
+       // primaryColor:Colors.orange[800],
         //252,209,42
         
-       // primaryColor: Color(0xFFf49820),
+       primaryColor: Color(0xFFf49820),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),
@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 //image slider widget
-                ImageSlider(),
+                ImageSlider(deals),
                 //departments didget
                 DepartmentList(),
                 Container(

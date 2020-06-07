@@ -4,6 +4,8 @@ import 'package:checkshopsonline/widgets/shop_list.dart';
 import 'package:checkshopsonline/widgets/slider.dart';
 import 'package:flutter/material.dart';
 
+import '../conf.dart';
+
 class ShopByDep extends StatefulWidget {
  final  Map<String,dynamic> dep;
   ShopByDep(this.dep);
@@ -27,7 +29,7 @@ class _ShopDetailState extends State<ShopByDep>{
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 //image slider widget
-                ImageSlider(),
+                ImageSlider(deals),
                 //departments widget
                 DepartmentList(selectedDepartmentId: widget.dep['id'],),
                 Container(

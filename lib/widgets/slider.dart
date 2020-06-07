@@ -1,19 +1,36 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:checkshopsonline/models/deal.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart' as launcher;
 
 class ImageSlider extends StatefulWidget {
+  final List<Deal> deals;
+  ImageSlider(this.deals);
   @override
   _SliderState createState() => _SliderState();
 }
 
 class _SliderState extends State<ImageSlider> {
-  final List<String> imgList = [
-    "assets/images/img_3.jpg",
-    "assets/images/img_1.jpg",
-    "assets/images/img_2.jpg",
-  ];
-  int _current = 0;
+  // YoutubePlayerController _youtubePlayerController;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _youtubePlayerController = YoutubePlayerController(
+  //     initialVideoId: 'iLnmTe5Q2Qw',
+  //     flags: YoutubePlayerFlags(
+  //       autoPlay: false,
+  //       mute: true,
+  //     ),
+  //   );
+  // }
 
+  // @override
+  // void dispose() {
+  //   _youtubePlayerController.dispose();
+  //   super.dispose();
+  // }
+
+  int _current = 0;
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -27,13 +44,31 @@ class _SliderState extends State<ImageSlider> {
             alignment: Alignment.bottomRight,
             children: <Widget>[
               CarouselSlider.builder(
-                itemCount: imgList.length,
+                itemCount: widget.deals.length,
                 itemBuilder: (context, index) {
-                  return Image.asset(
-                    imgList[index],
-                    fit: BoxFit.cover,
-                    width: deviceSize.width,
-                  );
+                  var deal = widget.deals[index];
+                  if (deal.isImage) {
+                    return Image.asset(
+                      deal.mediaUrl,
+                      fit: BoxFit.cover,
+                      width: deviceSize.width,
+                    );
+                  } else {
+                    return Container(
+                      height: 200.0,
+                      width: deviceSize.width,
+                      color: Colors.grey,
+                      child: Center(
+                          child: IconButton(
+                            iconSize: 60.0,
+                        color: Colors.redAccent,
+                        icon: Image.asset("assets/images/youtube.png",),
+                        onPressed: (){
+                          launcher.launch(deal.mediaUrl);
+                        },
+                      )),
+                    );
+                  }
                 },
                 options: CarouselOptions(
                     autoPlay: false,
@@ -66,8 +101,8 @@ class _SliderState extends State<ImageSlider> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: imgList.map((url) {
-            int index = imgList.indexOf(url);
+          children: widget.deals.map((url) {
+            int index = widget.deals.indexOf(url);
             return Container(
               width: 8.0,
               height: 8.0,
