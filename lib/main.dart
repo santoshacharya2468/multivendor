@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           //252,209,42
 
           primaryColor: Color.fromRGBO(253, 184, 18, 1),
-          
+
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),
