@@ -60,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 //departments didget
                 DepartmentList(),
                 Container(
-<<<<<<< HEAD
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Text(
                     "Latest Shops",
@@ -79,15 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                   ),
                 )
-=======
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Text("Latest Shops",
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          // letterSpacing: 0.0,
-                          fontSize: 18.0,
-                        ))),
->>>>>>> 89fdf93e748e50c59885707ecbf0d783a42ffe8f
               ],
             ),
           ),
