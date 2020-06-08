@@ -1,4 +1,3 @@
-import 'package:checkshopsonline/admin/screens/shopDashHome.dart';
 import 'package:checkshopsonline/main.dart';
 import 'package:checkshopsonline/screens/shop_by_deparement.dart';
 import 'package:flutter/material.dart';
@@ -30,22 +29,17 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (context) => SelectionScreen());
       case 'latest_deals':
         return MaterialPageRoute(builder: (context) => LatesetDeals());
-      case "shop_dash_home":
-        return MaterialPageRoute(builder: (context) => ShopDashHome());
-      case 'latest_deals':
-        return MaterialPageRoute(builder: (context) => LatesetDeals());
-      case "login":
-        return MaterialPageRoute(builder: (context) => LoginPage());
-      case "register":
-        return MaterialPageRoute(builder: (context) => RegisterPage());
+        case "login":
+        return MaterialPageRoute(builder: (context)=>LoginPage());
+         case "register":
+        return MaterialPageRoute(builder: (context)=>RegisterPage());
       default:
         return null;
     }
   }
 }
-
-const apiKey = "457483758345";
-const baseUrl = "192.168.1.153:8080/";
+const apiKey="457483758345";
+const baseUrl="192.168.1.153:8080/";
 List<Deal> deals = [
   Deal(
       caption: "Nice",

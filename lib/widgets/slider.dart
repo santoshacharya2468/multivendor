@@ -58,17 +58,25 @@ class _SliderState extends State<ImageSlider> {
                       height: 200.0,
                       width: deviceSize.width,
                       color: Colors.grey,
-                      child: Center(
-                        child: IconButton(
-                          iconSize: 60.0,
-                          color: Colors.redAccent,
-                          icon: Image.asset(
-                            "assets/images/youtube.png",
+                      child: Stack(
+                        children: <Widget>[
+                          Image.asset(
+                            deal.bannerImage,
+                            fit: BoxFit.cover,
+                            width: deviceSize.width,
                           ),
-                          onPressed: () {
-                            launcher.launch(deal.mediaUrl);
-                          },
-                        ),
+                          Center(
+                              child: IconButton(
+                            iconSize: 60.0,
+                            color: Colors.redAccent,
+                            icon: Image.asset(
+                              "assets/images/youtube.png",
+                            ),
+                            onPressed: () {
+                              launcher.launch(deal.mediaUrl);
+                            },
+                          )),
+                        ],
                       ),
                     );
                   }
@@ -119,7 +127,6 @@ class _SliderState extends State<ImageSlider> {
             );
           }).toList(),
         ),
-       
       ],
     );
   }
