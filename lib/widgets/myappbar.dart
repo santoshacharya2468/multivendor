@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
   return AppBar(
     iconTheme: IconThemeData(color: Colors.white),
@@ -54,7 +52,9 @@ AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
         icon: Icon(
           Icons.lock,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "login");
+        },
       ),
     ],
     title: home
@@ -70,7 +70,7 @@ AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
                   //   "  shopsOnline",
                   //   style: GoogleFonts.pacifico(color: Colors.grey[700]),
                   // ),
-                  Image.asset("assets/images/logo3.jpg", height: 70, width: 100)
+                  Image.asset("assets/images/logo3.jpg", height: 60, width: 100)
                 ],
               ),
             ],

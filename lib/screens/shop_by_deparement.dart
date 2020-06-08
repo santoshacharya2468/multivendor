@@ -37,7 +37,7 @@ class _ShopDetailState extends State<ShopByDep>{
                     child: Text("${widget.dep['name']} Shops",
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                         ))
                         ),
               ],

@@ -6,6 +6,8 @@ import 'screens/latest_deals.dart';
 import 'screens/product_detail.dart';
 import 'screens/selections.dart';
 import 'screens/shop_detail.dart';
+import 'shop_admin/screeens/login.dart';
+import 'shop_admin/screeens/register.dart';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -27,12 +29,17 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (context) => SelectionScreen());
       case 'latest_deals':
         return MaterialPageRoute(builder: (context) => LatesetDeals());
+        case "login":
+        return MaterialPageRoute(builder: (context)=>LoginPage());
+         case "register":
+        return MaterialPageRoute(builder: (context)=>RegisterPage());
       default:
         return null;
     }
   }
 }
-
+const apiKey="457483758345";
+const baseUrl="192.168.1.153:8080/";
 List<Deal> deals = [
   Deal(
       caption: "Nice",

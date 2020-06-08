@@ -100,7 +100,7 @@ class _ShopDetailState extends State<ShopDetail> {
                             });
                           },
                           child: Container(
-                            height: 30.0,
+                            height: 20.0,
                             width: deviceSize.width / 2 - 10,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
@@ -123,7 +123,7 @@ class _ShopDetailState extends State<ShopDetail> {
                             });
                           },
                           child: Container(
-                            height: 30.0,
+                            height: 20.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               color: _pageIndex == 1

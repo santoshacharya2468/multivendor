@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           // letterSpacing: 0.0,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                         ))),
               ],
             ),
