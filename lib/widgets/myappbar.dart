@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
+AppBar buildAppBar(BuildContext context,
+    {bool home = false, pin: true, search: true}) {
   return AppBar(
     iconTheme: IconThemeData(color: Colors.white),
     actionsIconTheme: IconThemeData(color: Colors.white, size: 25.0),
@@ -44,18 +45,35 @@ AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
         ),
         onPressed: () {},
       ),
-      IconButton(
-        icon: Icon(
-          Icons.search,
+      search
+          ? IconButton(
+              icon: Icon(
+                Icons.search,
+              ),
+              onPressed: () {},
+            )
+          : Container(),
+      // IconButton(
+      //   icon: Icon(
+      //     Icons.lock,
+      //   ),
+
+      //   onPressed: () {},5
+
+      // ),
+      FlatButton(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 12),
+            Icon(
+              Icons.lock,
+            ),
+            Text("Status"),
+          ],
         ),
         onPressed: () {},
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.lock,
-        ),
-        onPressed: () {},
-      ),
+      )
     ],
     title: home
         ? Column(

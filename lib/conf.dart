@@ -1,3 +1,4 @@
+import 'package:checkshopsonline/admin/screens/shopDashHome.dart';
 import 'package:checkshopsonline/main.dart';
 import 'package:checkshopsonline/screens/shop_by_deparement.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,8 @@ class RouterGenerator{
       return MaterialPageRoute(builder: (context)=>SelectionScreen());
       case 'latest_deals':
       return MaterialPageRoute(builder: (context)=>LatesetDeals());
+      case "shop_dash_home":
+      return MaterialPageRoute(builder:(context)=>ShopDashHome());
       default:
       return  null;
     }

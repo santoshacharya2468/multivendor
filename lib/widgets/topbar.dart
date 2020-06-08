@@ -1,7 +1,8 @@
 import 'package:checkshopsonline/models/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
-const iconSize=25.0;
+
+const iconSize = 25.0;
 Widget buildTopBar(BuildContext context, Shop shop) {
   final deviceSize = MediaQuery.of(context).size;
   return Container(
@@ -15,7 +16,7 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Icon(
             Icons.location_on,
-            size:iconSize,
+            size: iconSize,
             color: Theme.of(context).primaryColor,
           ),
           onPressed: () {},
@@ -23,20 +24,20 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Icon(
             Icons.language,
-              size:iconSize,
+            size: iconSize,
             color: Theme.of(context).primaryColor,
           ),
-          onPressed: ()async {
-             if (await launcher.canLaunch("https://www.youtube.com")) {
+          onPressed: () async {
+            if (await launcher.canLaunch("https://www.youtube.com")) {
               launcher.launch("https://www.youtube.com");
             }
           },
         ),
         IconButton(
           icon: Icon(Icons.call,
-              size:iconSize, color: Theme.of(context).primaryColor),
+              size: iconSize, color: Theme.of(context).primaryColor),
           onPressed: () async {
-            if (await launcher.canLaunch("tel:"+shop.mobileNumnber)) {
+            if (await launcher.canLaunch("tel:" + shop.mobileNumnber)) {
               launcher.launch("tel:${shop.mobileNumnber}");
             }
           },
@@ -44,7 +45,7 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Icon(
             Icons.smartphone,
-             size:iconSize,
+            size: iconSize,
             color: Theme.of(context).primaryColor,
           ),
           onPressed: () {},
@@ -64,7 +65,7 @@ Widget buildTopBar(BuildContext context, Shop shop) {
         IconButton(
           icon: Icon(
             Icons.list,
-             size:iconSize,
+            size: iconSize,
             color: Theme.of(context).primaryColor,
           ),
           onPressed: () {},

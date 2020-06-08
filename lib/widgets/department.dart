@@ -65,6 +65,7 @@ class _DepartmentListState extends State<DepartmentList> {
                     child: Text(
                       departments[index]['name'],
                       overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.blueGrey),
                     ),
                   )

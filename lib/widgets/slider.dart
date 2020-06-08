@@ -59,19 +59,22 @@ class _SliderState extends State<ImageSlider> {
                       width: deviceSize.width,
                       color: Colors.grey,
                       child: Center(
-                          child: IconButton(
-                            iconSize: 60.0,
-                        color: Colors.redAccent,
-                        icon: Image.asset("assets/images/youtube.png",),
-                        onPressed: (){
-                          launcher.launch(deal.mediaUrl);
-                        },
-                      )),
+                        child: IconButton(
+                          iconSize: 60.0,
+                          color: Colors.redAccent,
+                          icon: Image.asset(
+                            "assets/images/youtube.png",
+                          ),
+                          onPressed: () {
+                            launcher.launch(deal.mediaUrl);
+                          },
+                        ),
+                      ),
                     );
                   }
                 },
                 options: CarouselOptions(
-                    autoPlay: false,
+                    autoPlay: true,
                     height: 200.0,
                     viewportFraction: 1.0,
                     enlargeCenterPage: true,
@@ -115,7 +118,8 @@ class _SliderState extends State<ImageSlider> {
               ),
             );
           }).toList(),
-        )
+        ),
+       
       ],
     );
   }
