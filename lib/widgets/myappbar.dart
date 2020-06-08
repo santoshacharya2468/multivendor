@@ -3,7 +3,7 @@ AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
   return AppBar(
     iconTheme: IconThemeData(color: Colors.white),
     actionsIconTheme: IconThemeData(color: Colors.white, size: 25.0),
-    automaticallyImplyLeading: home ? false : true,
+    automaticallyImplyLeading: false ,
     actions: <Widget>[
       !home
           ? IconButton(
@@ -57,25 +57,8 @@ AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
         },
       ),
     ],
-    title: home
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // Text("  Check",
-              //     style: TextStyle(fontSize: 25.0, color: Colors.grey[700])),
-              Row(
-                children: <Widget>[
-                  SizedBox(width: 20.0),
-                  // Text(
-                  //   "  shopsOnline",
-                  //   style: GoogleFonts.pacifico(color: Colors.grey[700]),
-                  // ),
-                  Image.asset("assets/images/logo3.jpg", height: 60, width: 100)
-                ],
-              ),
-            ],
-          )
-        : Container(height: 0.0),
-    titleSpacing: 0.0,
+    title:Image.asset("assets/images/logo3.jpg", height: 60, width: 100),
+   
+    titleSpacing: 5.0,
   );
 }
