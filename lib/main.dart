@@ -6,21 +6,22 @@ import 'widgets/department.dart';
 import 'widgets/myappbar.dart';
 import 'widgets/shop_list.dart';
 import 'widgets/slider.dart';
+
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   // This widget is the root of  application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context)=>SelectionBloc())
-      ],
-          child: MaterialApp(
+      providers: [BlocProvider(create: (context) => SelectionBloc())],
+      child: MaterialApp(
         onGenerateRoute: RouterGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          primaryColor: Color.fromRGBO(253, 184, 18, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: buildAppBar(context,home: true),
+      appBar: buildAppBar(context, home: true),
       body: Container(
         height: deviceSize.height,
         width: deviceSize.width,
@@ -61,8 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           color: Theme.of(context).primaryColor,
                           // letterSpacing: 0.0,
                           fontSize: 20.0,
-                        ))
-                        ),
+                        ))),
               ],
             ),
           ),

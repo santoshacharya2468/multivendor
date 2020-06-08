@@ -61,15 +61,16 @@ AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("  Check",
-                  style: TextStyle(fontSize: 25.0, color: Colors.grey[700])),
+              // Text("  Check",
+              //     style: TextStyle(fontSize: 25.0, color: Colors.grey[700])),
               Row(
                 children: <Widget>[
-                  SizedBox(width: 10.0),
-                  Text(
-                    "  shopsOnline",
-                    style: GoogleFonts.pacifico(color: Colors.grey[700]),
-                  ),
+                  SizedBox(width: 20.0),
+                  // Text(
+                  //   "  shopsOnline",
+                  //   style: GoogleFonts.pacifico(color: Colors.grey[700]),
+                  // ),
+                  Image.asset("assets/images/logo3.jpg", height: 70, width: 100)
                 ],
               ),
             ],
