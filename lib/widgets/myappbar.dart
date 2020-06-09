@@ -57,7 +57,7 @@ AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
         },
       ),
     ],
-    title:Image.asset("assets/images/logo3.jpg", height: 60, width: 100),
+    title:Image.asset("assets/images/logo3.jpg", height: 60, width: 90),
    
     titleSpacing: 5.0,
   );

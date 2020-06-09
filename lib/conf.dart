@@ -6,12 +6,14 @@ import 'screens/latest_deals.dart';
 import 'screens/product_detail.dart';
 import 'screens/selections.dart';
 import 'screens/shop_detail.dart';
+import 'shop_admin/screeens/dashboard.dart';
 import 'shop_admin/screeens/login.dart';
 import 'shop_admin/screeens/register.dart';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      //all pages for client
       case '/':
         return MaterialPageRoute(builder: (context) => MyHomePage());
       case "shop_detail":
@@ -29,17 +31,20 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (context) => SelectionScreen());
       case 'latest_deals':
         return MaterialPageRoute(builder: (context) => LatesetDeals());
+        //from here shop-admin routes start
         case "login":
         return MaterialPageRoute(builder: (context)=>LoginPage());
          case "register":
         return MaterialPageRoute(builder: (context)=>RegisterPage());
+        case "dashboard":
+        return MaterialPageRoute(builder: (context)=>DashBoardPage());
       default:
         return null;
     }
   }
 }
-const apiKey="457483758345";
-const baseUrl="192.168.1.153:8080/";
+const apiKey="53465FDSFf##%#%%";
+const baseUrl="http://192.168.1.153:8080/";
 List<Deal> deals = [
   Deal(
       caption: "Nice",

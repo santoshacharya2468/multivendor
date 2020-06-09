@@ -1,11 +1,15 @@
 
 import 'package:checkshopsonline/shop_admin/models/user.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../../conf.dart';
 abstract class AuthEvents{}
 class AuthLoginEvent extends AuthEvents{
- final  User user;
-  AuthLoginEvent({this.user});
+ final  String email;
+ final String password;
+  AuthLoginEvent({this.email,this.password});
 }
 class InitializeAuth extends AuthEvents{}
 class AuthLogoutEvent extends AuthEvents{}
@@ -20,7 +24,7 @@ class AuthFailedState extends AuthState{
   final String message;
   AuthFailedState({this.message});
 }
-class AuhtTryingState extends AuthState{}
+class AuthTryingState extends AuthState{}
 class AuthBloc extends Bloc<AuthEvents,AuthState>{
   User user;
   FlutterSecureStorage storage=FlutterSecureStorage();
@@ -55,38 +59,36 @@ class AuthBloc extends Bloc<AuthEvents,AuthState>{
 
     }
     else if(event is AuthLoginEvent){
-      user=event.user;
-     // yield AuthLoggedInState(user: user);
-        // yield AuhtTryingState();
-        
-        // //send http request for login
-        //   Dio dio = Dio(BaseOptions(headers: {
-        //   "apikey": apiKey,
-        // }, validateStatus: (status) => true, baseUrl: baseUrl));
-        // //make http request to server
-        // try {
-        //   var response = await dio.post("account/login",data: {"email":event.email,"password":event.password});
-        //   if (response.statusCode == 200) {
-        //      FlutterSecureStorage storage=FlutterSecureStorage();
-        //      user.token=response.data['token'];
-        //      user.email=event.email;
-        //      yield AuthLoggedInState(user: user);
-        //      await storage.write(key: "email", value: event.email);
-        //      await storage.write(key: "token", value: user.token);
-        //     //  user.name=event.password;
-        //   } else if(response.statusCode==401) {
-        //     yield AuthFailedState(message:response.data['message']);
-        //     //yield ProductLoadingErrorState();
-        //   }
-        //   else{
-        //     yield AuthFailedState(message:"Server Error");
+        yield AuthTryingState();
+        //send http request for login
+          Dio dio = Dio(BaseOptions(headers: {
+          "apikey": apiKey,
+        }, validateStatus: (status) => true, baseUrl: baseUrl));
+        //make http request to server
+        try {
+          var response = await dio.post("account/login",data: {"email":event.email,"password":event.password});
+          if (response.statusCode == 200) {
+             FlutterSecureStorage storage=FlutterSecureStorage();
+             user=User();
+             user.token=response.data['token'];
+             user.email=event.email;
+             yield AuthLoggedInState(user: user);
+             await storage.write(key: "email", value: event.email);
+             await storage.write(key: "token", value: user.token);
+            //  user.name=event.password;
+          } else if(response.statusCode==401) {
+            yield AuthFailedState(message:response.data['message']);
+            //yield ProductLoadingErrorState();
+          }
+          else{
+            yield AuthFailedState(message:"Server Error");
 
 
-        //   }
-        // } catch (e) {
-        //   yield AuthFailedState(message:"Internet Error");
+          }
+        } catch (e) {
+          yield AuthFailedState(message:"Internet Error");
 
-        // }
+        }
 
     }
   
