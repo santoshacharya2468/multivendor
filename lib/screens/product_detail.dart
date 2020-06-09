@@ -90,7 +90,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     },
                     child: Container(
                       height: 45.0,
-                      width: 220.0,
+                      width: 230.0,
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         child: Center(

@@ -60,17 +60,19 @@ class _SliderState extends State<ImageSlider> {
                       color: Colors.grey,
                       child: Stack(
                         children: <Widget>[
-                         Image.asset(
-                      deal.bannerImage,
-                      fit: BoxFit.cover,
-                      width: deviceSize.width,
-                    ),
+                          Image.asset(
+                            deal.bannerImage,
+                            fit: BoxFit.cover,
+                            width: deviceSize.width,
+                          ),
                           Center(
                               child: IconButton(
-                                iconSize: 60.0,
+                            iconSize: 60.0,
                             color: Colors.redAccent,
-                            icon: Image.asset("assets/images/youtube.png",),
-                            onPressed: (){
+                            icon: Image.asset(
+                              "assets/images/youtube.png",
+                            ),
+                            onPressed: () {
                               launcher.launch(deal.mediaUrl);
                             },
                           )),
@@ -80,7 +82,7 @@ class _SliderState extends State<ImageSlider> {
                   }
                 },
                 options: CarouselOptions(
-                    autoPlay: false,
+                    autoPlay: true,
                     height: 200.0,
                     viewportFraction: 1.0,
                     enlargeCenterPage: true,
@@ -124,7 +126,7 @@ class _SliderState extends State<ImageSlider> {
               ),
             );
           }).toList(),
-        )
+        ),
       ],
     );
   }

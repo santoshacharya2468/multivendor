@@ -21,9 +21,13 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouterGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Color.fromRGBO(253, 184, 18, 1),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+            primaryColor: Color.fromRGBO(253, 184, 18, 1),
+            accentColor: Colors.white,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            buttonTheme: ButtonThemeData(
+                buttonColor: Color.fromRGBO(253, 184, 18, 1),
+                textTheme: ButtonTextTheme.accent),
+            iconTheme: IconThemeData(color: Colors.white)),
         home: MyHomePage(),
       ),
     );
@@ -56,13 +60,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 //departments didget
                 DepartmentList(),
                 Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Text("Latest Shops",
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          // letterSpacing: 0.0,
-                          fontSize: 18.0,
-                        ))),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Text(
+                    "Latest Shops",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      // letterSpacing: 0.0,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+             
               ],
             ),
           ),

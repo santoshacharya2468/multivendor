@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
+
+AppBar buildAppBar(BuildContext context,
+    {bool home = false, pin: true, search: true}) {
   return AppBar(
     iconTheme: IconThemeData(color: Colors.white),
     actionsIconTheme: IconThemeData(color: Colors.white, size: 25.0),
-    automaticallyImplyLeading: false ,
+    automaticallyImplyLeading: false,
     actions: <Widget>[
       !home
           ? IconButton(
@@ -42,23 +44,41 @@ AppBar buildAppBar(BuildContext context, {bool home = false, pin: true}) {
         ),
         onPressed: () {},
       ),
-      IconButton(
-        icon: Icon(
-          Icons.search,
-        ),
-        onPressed: () {},
-      ),
+      search
+          ? IconButton(
+              icon: Icon(
+                Icons.search,
+              ),
+              onPressed: () {},
+            )
+          : Container(),
       IconButton(
         icon: Icon(
           Icons.lock,
         ),
+
         onPressed: () {
           Navigator.pushNamed(context, "login");
-        },
+        }
+
       ),
+      // FlatButton(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: <Widget>[
+      //       SizedBox(height: 12),
+      //       Icon(
+      //         Icons.lock,
+      //       ),
+           
+      //     ],
+      //   ),
+      //   onPressed: () {
+      //     Navigator.pushNamed(context, "login");
+      //   },
+      // ),
     ],
     title:Image.asset("assets/images/logo3.jpg", height: 60, width: 90),
-   
     titleSpacing: 5.0,
   );
 }

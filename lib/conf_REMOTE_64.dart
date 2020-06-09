@@ -1,4 +1,3 @@
-import 'package:checkshopsonline/admin/screens/shopDashHome.dart';
 import 'package:checkshopsonline/main.dart';
 import 'package:checkshopsonline/screens/shop_by_deparement.dart';
 import 'package:flutter/material.dart';
@@ -9,29 +8,10 @@ import 'screens/selections.dart';
 import 'screens/shop_detail.dart';
 import 'shop_admin/screeens/login.dart';
 import 'shop_admin/screeens/register.dart';
-  final List<Map<String, dynamic>> departments = [
-    {"id": 1, "name": "Fashion", "icon": "assets/images/hanger.png"},
-    {
-      "id": 2,
-      "name": "Furniture & Appliance",
-      "icon": "assets/images/sofa.png"
-    },
-    {"id": 3, "name": "Home Deco", "icon": "assets/images/living-room.png"},
-    {"id": 4, "name": "Leisure", "icon": "assets/images/sofa.png"},
-    {"id": 5, "name": "FoodsStuff", "icon": "assets/images/fork.png"},
-    {"id": 6, "name": "Vechicles", "icon": "assets/images/car.png"},
-    {"id": 7, "name": "Services", "icon": "assets/images/support.png"},
-  ];
-  const List<String> packageDuration=[
-    "3 Month",
-    "6 Month",
-    "1 Year"
 
-  ];
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      //all pages for client
       case '/':
         return MaterialPageRoute(builder: (context) => MyHomePage());
       case "shop_detail":
@@ -49,27 +29,17 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (context) => SelectionScreen());
       case 'latest_deals':
         return MaterialPageRoute(builder: (context) => LatesetDeals());
-        //from here shop-admin routes start
         case "login":
         return MaterialPageRoute(builder: (context)=>LoginPage());
          case "register":
         return MaterialPageRoute(builder: (context)=>RegisterPage());
-        case "dashboard":
-        return MaterialPageRoute(builder: (context)=>ShopDashHome());
-      case 'latest_deals':
-        return MaterialPageRoute(builder: (context) => LatesetDeals());
-      case "login":
-        return MaterialPageRoute(builder: (context) => LoginPage());
-      case "register":
-        return MaterialPageRoute(builder: (context) => RegisterPage());
       default:
         return null;
     }
   }
 }
-
-const apiKey="53465FDSFf##%#%%";
-const baseUrl="http://192.168.1.153:8080/";
+const apiKey="457483758345";
+const baseUrl="192.168.1.153:8080/";
 List<Deal> deals = [
   Deal(
       caption: "Nice",

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../conf.dart';
+
 class DepartmentList extends StatefulWidget {
   final selectedDepartmentId;
   DepartmentList({this.selectedDepartmentId});
@@ -8,19 +10,6 @@ class DepartmentList extends StatefulWidget {
 }
 
 class _DepartmentListState extends State<DepartmentList> {
-  final List<Map<String, dynamic>> departments = [
-    {"id": 1, "name": "Fashion", "icon": "assets/images/hanger.png"},
-    {
-      "id": 2,
-      "name": "Furniture & Appliance",
-      "icon": "assets/images/sofa.png"
-    },
-    {"id": 3, "name": "Home Deco", "icon": "assets/images/living-room.png"},
-    {"id": 4, "name": "Leisure", "icon": "assets/images/sofa.png"},
-    {"id": 5, "name": "FoodsStuff", "icon": "assets/images/fork.png"},
-    {"id": 6, "name": "Vechicles", "icon": "assets/images/car.png"},
-    {"id": 7, "name": "Services", "icon": "assets/images/support.png"},
-  ];
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -65,6 +54,7 @@ class _DepartmentListState extends State<DepartmentList> {
                     child: Text(
                       departments[index]['name'],
                       overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.blueGrey),
                     ),
                   )
