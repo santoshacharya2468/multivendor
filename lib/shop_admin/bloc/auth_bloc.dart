@@ -1,15 +1,17 @@
-
 import 'package:checkshopsonline/shop_admin/models/user.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import '../../conf.dart';
 abstract class AuthEvents{}
 class AuthLoginEvent extends AuthEvents{
  final  String email;
  final String password;
   AuthLoginEvent({this.email,this.password});
+}
+class AuthRegisterEvent extends AuthEvents{
+  dynamic formData;
+  AuthRegisterEvent(this.formData);
 }
 class InitializeAuth extends AuthEvents{}
 class AuthLogoutEvent extends AuthEvents{}
@@ -20,6 +22,7 @@ class AuthLoggedInState extends AuthState{
   final User user;
   AuthLoggedInState({this.user});
 }
+class AuthRegisterCompletedState extends AuthState{}
 class AuthFailedState extends AuthState{
   final String message;
   AuthFailedState({this.message});
@@ -91,8 +94,33 @@ class AuthBloc extends Bloc<AuthEvents,AuthState>{
         }
 
     }
-  
+  if(event is AuthRegisterEvent){
+    //send http request to serer for registeration;
+     yield AuthTryingState();
+        //send http request for register
+          Dio dio = Dio(BaseOptions(headers: {
+          "apikey": apiKey,
+        }, validateStatus: (status) => true, baseUrl: baseUrl));
+        //make http request to server
+        try {
+          var response = await dio.post("shop/",data:event.formData);
+          if (response.statusCode == 200) {
+             yield AuthRegisterCompletedState();
+          } else if(response.statusCode==409) {
+            yield AuthFailedState(message:response.data['message']);
+            //yield ProductLoadingErrorState();
+          }
+          else{
+            yield AuthFailedState(message:"Server Error");
 
+
+          }
+        } catch (e) {
+          yield AuthFailedState(message:"Internet Error");
+
+        }
   }
 
+  }
+  
 }

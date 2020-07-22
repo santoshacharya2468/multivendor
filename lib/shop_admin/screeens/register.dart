@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:checkshopsonline/shop_admin/bloc/auth_bloc.dart';
 import 'package:checkshopsonline/shop_admin/widgets/appbar.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,11 +25,12 @@ class _LoginPageState extends State<RegisterPage> {
   final businessEmailController = new TextEditingController();
   final telephoneController = new TextEditingController();
   final mobileController = new TextEditingController();
-   final dayController = new TextEditingController();
+  final dayController = new TextEditingController();
   final monthController = new TextEditingController();
   final yearController = new TextEditingController();
   String packaDuration = packageDuration[0];
-  String seletectedCategory=departments[0]['name'];
+  String selectedDistrict = districts[0];
+  String seletectedCategory = departments[0]['name'];
   List<String> mobiles = [];
   List<String> telephones = [];
   List<String> addresses = [];
@@ -191,9 +193,8 @@ class _LoginPageState extends State<RegisterPage> {
                                       title: "Add another mobile",
                                       validator: validateMobile);
                                   if (extra != null) {
-                                   
                                     setState(() {
-                                       mobiles.add(extra);
+                                      mobiles.add(extra);
                                     });
                                   }
                                 },
@@ -201,19 +202,25 @@ class _LoginPageState extends State<RegisterPage> {
                             ],
                           ),
                         ),
-                        mobiles.length>0?Container(
-                          height: 100.0,
-                          child: ListView(
-                            children: mobiles.map((e) => ListTile(
-                              title: Text(e),
-                              trailing: IconButton(icon: Icon(Icons.cancel), onPressed: (){
-                                setState(() {
-                                  mobiles.remove(e);
-                                });
-                              }),
-                            )).toList(),
-                          ),
-                        ):Container(height:0,width:0.0),
+                        mobiles.length > 0
+                            ? Container(
+                                height: 100.0,
+                                child: ListView(
+                                  children: mobiles
+                                      .map((e) => ListTile(
+                                            title: Text(e),
+                                            trailing: IconButton(
+                                                icon: Icon(Icons.cancel),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    mobiles.remove(e);
+                                                  });
+                                                }),
+                                          ))
+                                      .toList(),
+                                ),
+                              )
+                            : Container(height: 0, width: 0.0),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Stack(
@@ -235,7 +242,6 @@ class _LoginPageState extends State<RegisterPage> {
                                 icon: Icon(Icons.add,
                                     color: Theme.of(context).primaryColor),
                                 onPressed: () async {
-
                                   var extra = await getExtraField(
                                       context: context,
                                       hint: "telephone",
@@ -245,7 +251,6 @@ class _LoginPageState extends State<RegisterPage> {
                                     setState(() {
                                       telephones.add(extra);
                                     });
-                                    
                                   }
                                   // telephones.add(extra);
                                 },
@@ -253,19 +258,25 @@ class _LoginPageState extends State<RegisterPage> {
                             ],
                           ),
                         ),
-                          telephones.length>0?Container(
-                          height: 100.0,
-                          child: ListView(
-                            children: telephones.map((e) => ListTile(
-                              title: Text(e),
-                              trailing: IconButton(icon: Icon(Icons.cancel), onPressed: (){
-                                setState(() {
-                                  telephones.remove(e);
-                                });
-                              }),
-                            )).toList(),
-                          ),
-                        ):Container(height:0,width:0.0),
+                        telephones.length > 0
+                            ? Container(
+                                height: 100.0,
+                                child: ListView(
+                                  children: telephones
+                                      .map((e) => ListTile(
+                                            title: Text(e),
+                                            trailing: IconButton(
+                                                icon: Icon(Icons.cancel),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    telephones.remove(e);
+                                                  });
+                                                }),
+                                          ))
+                                      .toList(),
+                                ),
+                              )
+                            : Container(height: 0, width: 0.0),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Stack(
@@ -287,29 +298,34 @@ class _LoginPageState extends State<RegisterPage> {
                                       title: "Add another adddress",
                                       validator: validateAddress);
                                   if (extra != null) {
-                                    setState((){
-                                         addresses.add(extra);
+                                    setState(() {
+                                      addresses.add(extra);
                                     });
-                                   
                                   }
                                 },
                               ),
                             ],
                           ),
                         ),
-                          addresses.length>0?Container(
-                          height: 100.0,
-                          child: ListView(
-                            children: addresses.map((e) => ListTile(
-                              title: Text(e),
-                              trailing: IconButton(icon: Icon(Icons.cancel), onPressed: (){
-                                setState(() {
-                                  addresses.remove(e);
-                                });
-                              }),
-                            )).toList(),
-                          ),
-                        ):Container(height:0,width:0.0),
+                        addresses.length > 0
+                            ? Container(
+                                height: 100.0,
+                                child: ListView(
+                                  children: addresses
+                                      .map((e) => ListTile(
+                                            title: Text(e),
+                                            trailing: IconButton(
+                                                icon: Icon(Icons.cancel),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    addresses.remove(e);
+                                                  });
+                                                }),
+                                          ))
+                                      .toList(),
+                                ),
+                              )
+                            : Container(height: 0, width: 0.0),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextFormField(
@@ -370,16 +386,43 @@ class _LoginPageState extends State<RegisterPage> {
                           height: 50.0,
                           child: Row(
                             children: <Widget>[
+                              Text("Choose District"),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: new DropdownButton<String>(
+                                  value: selectedDistrict,
+                                  iconSize: 30.0,
+                                  items: districts.map((value) {
+                                    return new DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (dis) {
+                                    setState(() {
+                                      selectedDistrict = dis;
+                                    });
+                                  },
+                                ),
+                              ),
+                              // Text(seletectedCategory==null?"take one":seletectedCategory),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 50.0,
+                          child: Row(
+                            children: <Widget>[
                               Text("Choose Package Duration"),
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: new DropdownButton<String>(
-                                  value: packaDuration,
+                                  value: '$packaDuration',
                                   iconSize: 30.0,
                                   items: packageDuration.map((value) {
                                     return new DropdownMenuItem<String>(
                                       value: value,
-                                      child: new Text(value),
+                                      child: new Text("$value month"),
                                     );
                                   }).toList(),
                                   onChanged: (duration) {
@@ -400,7 +443,7 @@ class _LoginPageState extends State<RegisterPage> {
                               Expanded(
                                 flex: 1,
                                 child: TextFormField(
-                                  controller: dayController,
+                                    controller: dayController,
                                     validator: (v) {
                                       if (int.parse(v) > 32) {
                                         return 'invalid day';
@@ -417,7 +460,7 @@ class _LoginPageState extends State<RegisterPage> {
                               Expanded(
                                 flex: 1,
                                 child: TextFormField(
-                                  controller: monthController,
+                                    controller: monthController,
                                     validator: (v) {
                                       if (int.parse(v) > 12) {
                                         return 'invalid month';
@@ -434,7 +477,7 @@ class _LoginPageState extends State<RegisterPage> {
                               Expanded(
                                 flex: 1,
                                 child: TextFormField(
-                                  controller:yearController,
+                                    controller: yearController,
                                     validator: (v) {
                                       if (int.parse(v) < 2020) {
                                         return 'invalid year';
@@ -453,40 +496,67 @@ class _LoginPageState extends State<RegisterPage> {
                           padding: const EdgeInsets.all(10.0),
                           child: Container(
                             height: 40.0,
-                            child: RaisedButton(
-                              child: Center(
-                                  child: Text(
-                                "Submit",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20.0),
-                              )),
-                              onPressed: () {
-                                if (formKey.currentState.validate()) {
-                                  addresses.add(addressController.text);
-                                  mobiles.add(mobileController.text);
-                                  telephones.add(telephoneController.text);
-                                  var data = {
-                                    "email": emailController.text,
-                                    "password": passwordController.text,
-                                    "businessName": businessNameController.text,
-                                    "website": websiteController.text,
-                                    "facebook": facebookController.text,
-                                    "businessEmail":
-                                        businessEmailController.text,
-                                    "address": addresses,
-                                    "telephones": telephones,
-                                    "mobiles": mobiles,
-                                    "package":{
-                                      "duration":packageDuration,
-                                      "day":dayController,
-                                      "month":monthController.text,
-                                      "year":yearController.text,
-                                    },
-                                    
-                                  };
-                                  print(data);
+                            child: BlocConsumer<AuthBloc, AuthState>(
+                              listener: (context, state) {
+                                if(state is AuthRegisterCompletedState){
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text("Success"),
+                                    backgroundColor: Colors.greenAccent,
+                                  ));
+                                }
+                                else if(state is AuthFailedState){
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text(state.message),
+                                    backgroundColor: Colors.redAccent,
+                                  ));
                                 }
                               },
+                              builder: (context, state) => RaisedButton(
+                                child: Center(
+                                    child: Text(
+                                  "Submit",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20.0),
+                                )),
+                                onPressed: () async {
+                                  if (formKey.currentState.validate()) {
+                                    if (pickedImage == null) {
+                                      Scaffold.of(context).showSnackBar(
+                                          SnackBar(
+                                              content: Text("Choose logo"),
+                                              backgroundColor:
+                                                  Colors.redAccent));
+                                    } else {
+                                      addresses.add(addressController.text);
+                                      mobiles.add(mobileController.text);
+                                      telephones.add(telephoneController.text);
+                                      var data = {
+                                        "email": emailController.text,
+                                        "password": passwordController.text,
+                                        "businessName":
+                                            businessNameController.text,
+                                        "website": websiteController.text,
+                                        "facebook": facebookController.text,
+                                        "businessEmail":
+                                            businessEmailController.text,
+                                        "address": addresses,
+                                        "district": selectedDistrict,
+                                        "telephones": telephones,
+                                        "mobiles": mobiles,
+                                        "duration": int.parse(packaDuration),
+                                        "day": int.parse(dayController.text),
+                                        "month":
+                                            int.parse(monthController.text),
+                                        "year": int.parse(yearController.text),
+                                        "logo": await MultipartFile.fromFile(
+                                            pickedImage.path)
+                                      };
+                                      var formData = FormData.fromMap(data);
+                                      BlocProvider.of<AuthBloc>(context).add(AuthRegisterEvent(formData));
+                                    }
+                                  }
+                                },
+                              ),
                             ),
                             color: Theme.of(context).primaryColor,
                           ),

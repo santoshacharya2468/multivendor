@@ -23,10 +23,22 @@ import 'shop_admin/screeens/register.dart';
     {"id": 7, "name": "Services", "icon": "assets/images/support.png"},
   ];
   const List<String> packageDuration=[
-    "3 Month",
-    "6 Month",
-    "1 Year"
+    "3",
+    "6",
+    "12"
 
+  ];
+  const List<String> districts=[
+"Port Louis",
+"Pamplemousses",
+"Rivière du Rempart",
+"Plaines Wilhems",
+"Moka",
+"Flacq",
+"Grand Port",
+"Rivière Noire",
+"Savanne",
+"Rodrigues"
   ];
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -69,7 +81,7 @@ class RouterGenerator {
 }
 
 const apiKey="53465FDSFf##%#%%";
-const baseUrl="http://192.168.1.153:8080/";
+const baseUrl="http://10.0.2.2:8000/";
 List<Deal> deals = [
   Deal(
       caption: "Nice",

@@ -10,7 +10,7 @@ import 'widgets/slider.dart';
 void main() {
   runApp(MyApp());
 }
-
+//0 180 179
 class MyApp extends StatelessWidget {
   // This widget is the root of  application.
   @override
@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouterGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primaryColor: Color.fromRGBO(253, 184, 18, 1),
+            primaryColor: Color.fromRGBO(0, 180, 179, 1),
             accentColor: Colors.white,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             buttonTheme: ButtonThemeData(
-                buttonColor: Color.fromRGBO(253, 184, 18, 1),
+                buttonColor: Color.fromRGBO(0, 180, 179, 1),
                 textTheme: ButtonTextTheme.accent),
             iconTheme: IconThemeData(color: Colors.white)),
         home: MyHomePage(),
@@ -34,13 +34,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
 
-class _MyHomePageState extends State<MyHomePage> {
+
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
